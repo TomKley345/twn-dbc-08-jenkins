@@ -11,7 +11,7 @@ pipeline {
         // through PLUGINS
         // 1. Credentails Plugin
         // 2. Credentials Binding Plugin
-        SERVER_CREDENTIALS = credentials("credentialsId")
+        SERVER_CREDENTIALS = credentials("testCredsId")
     }
 
     parameters {
@@ -55,7 +55,7 @@ pipeline {
                 // parameters used: choice
                 echo "deploying docker image... version ${params.VERSION}"
                 withCredentials([
-                    usernamePassword(credentials: 'credentialsId', usernameVariable: USER, passwordVariable: PWD)
+                    usernamePassword(credentials: 'testCredsId', usernameVariable: USER, passwordVariable: PWD)
                 ]) {
                     sh "some script ${USER} ${PWD}"
                 }
