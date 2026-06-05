@@ -36,9 +36,8 @@ pipeline {
             steps {
                 echo 'building app'
 
-                script {
-                    gv.buildApp
-                }
+                // Correct: Call with braces, as this is a method
+                gv.buildApp() 
                 
                 // environment used: version
                 echo "version ${NEW_VERSION}"
