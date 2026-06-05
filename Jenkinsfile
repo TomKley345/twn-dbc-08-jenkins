@@ -63,9 +63,16 @@ pipeline {
             }
         }
         stage('deploy') {
+            input {
+                message "Select the target for this deployment"
+                ok "Done"
+                parameters {
+                    choice(name: 'TARGET_ENV', choices: ['STAGE', 'QA', 'PROD'], description: 'Target environment')
+                }
+            }
             steps {
                 // parameters used: choice
-                echo "deploying docker image... version ${params.VERSION}"
+                echo "deploying docker image... version ${params.VERSION}... to ${TARGET_ENV}"
                 withCredentials([
                     usernamePassword(credentialsId: 'testCredsId', usernameVariable: 'USER', passwordVariable: 'PWD')
                 ]) {
