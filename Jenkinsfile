@@ -63,16 +63,19 @@ pipeline {
             }
         }
         stage('deploy') {
-            input {
-                message "Select the target for this deployment"
-                ok "Done"
-                parameters {
-                    choice(name: 'TARGET_ENV', choices: ['STAGE', 'QA', 'PROD'], description: 'Target environment')
-                }
-            }
+            // stage-specific input has UI glitch: Input form is hiddne by default, only appears on hover
+            // input {
+               // message "Select the target for this deployment"
+               // ok "Done"
+               // parameters {
+                 //   choice(name: 'TARGET_ENV', choices: ['STAGE', 'QA', 'PROD'], description: 'Target environment')
+               // }
+            // }
             steps {
                 // parameters used: choice
-                echo "deploying docker image... version ${params.VERSION}... to ${TARGET_ENV}"
+                echo "deploying docker image... "
+                echo "version ${params.VERSION}... "
+                // echo "to ${TARGET_ENV}"
                 withCredentials([
                     usernamePassword(credentialsId: 'testCredsId', usernameVariable: 'USER', passwordVariable: 'PWD')
                 ]) {
