@@ -25,9 +25,20 @@ pipeline {
     }
     
     stages {
+        stage('init') {
+            steps {
+                script {
+                    gv = load "testscript.groovy"
+                }
+            }
+        }
         stage('build') {
             steps {
                 echo 'building app'
+
+                script {
+                    gv.buildApp
+                }
                 
                 // environment used: version
                 echo "version ${NEW_VERSION}"
