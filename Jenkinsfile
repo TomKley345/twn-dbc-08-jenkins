@@ -40,8 +40,8 @@ pipeline {
             when {
                 expression {
                     // parameters used: boolean
-                    // following steps onlyl get executed it this expression is true
-                    params.executeTests == True
+                    // following steps only get executed it this expression is true
+                    params.executeTests == true
                 }
             }
             steps {
