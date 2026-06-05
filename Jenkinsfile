@@ -55,9 +55,9 @@ pipeline {
                 // parameters used: choice
                 echo "deploying docker image... version ${params.VERSION}"
                 withCredentials([
-                    usernamePassword(credentials: 'testCredsId', usernameVariable: 'USER', passwordVariable: 'PWD')
+                    usernamePassword(credentialsId: 'testCredsId', usernameVariable: 'USER', passwordVariable: 'PWD')
                 ]) {
-                    echo "some script ${USER} ${PWD}"
+                    sh 'echo "The username is $USER and the password is $PWD"'
                 }
 
             }
