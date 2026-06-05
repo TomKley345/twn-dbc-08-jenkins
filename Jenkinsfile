@@ -1,17 +1,49 @@
 def gv
 
 pipeline {
+
     agent any
+
+    environment {
+        // Set a custom environment variable
+        NEW_VERSION = '1.3.0'
+        // use credentials()-function to retrieve creds stored in Jenkins
+        // through PLUGINS
+        // 1. Credentails Plugin
+        // 2. Credentials Binding Plugin
+        SERVER_CREDENTIALS = credentials("credentialsId")
+    }
+
+    parameters {
+        // string(name: 'VERSION', defaultValue: '', description: 'Version to deploy on Prod')
+        choice(name: 'VERSION', choicees: ['1.1.1', '1.2.0', '2.0.0'], description: 'Version to deploy on Prod')
+        booleanParam(name: 'executeTests', defaultValue: true, description: 'Toggle test execution')
+    }
+
+    tools {
+        maven "maven-3.9.16"
+    }
     
     stages {
         stage('build') {
             steps {
-                script {
-                    echo 'building app version...'
-                }
+                echo 'building app'
+                
+                // environment used: version
+                echo "version ${NEW_VERSION}"
+                
+                // tools used: maven
+                sh "mvn install"
             }
         }
         stage('test') {
+            when {
+                expression {
+                    // parameters used: boolean
+                    // following steps onlyl get executed it this expression is true
+                    params.executeTests == True
+                }
+            }
             steps {
                 script {
                     echo 'testing the application...'
@@ -20,8 +52,12 @@ pipeline {
         }
         stage('deploy') {
             steps {
-                script {
-                    echo 'deploying docker image...'
+                // parameters used: choice
+                echo "deploying docker image... version ${params.VERSION}"
+                withCredentials([
+                    usernamePassword(credentials: 'credentialsId', usernameVariable: USER, passwordVariable: PWD)
+                ]) {
+                    sh "some script ${USER} ${PWD}"
                 }
             }
         }
