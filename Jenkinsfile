@@ -1,3 +1,6 @@
+#!/usr/bin/env groovy
+
+@library('jenkins-shared-library')
 def gv
 
 pipeline {
@@ -33,6 +36,19 @@ pipeline {
             }
         }
 
+        stage("build jar from lib") {
+            when {
+                expression {
+                    BRANCH_NAME == "jenkins-shared-library"
+                }
+            }
+            steps {
+                script {
+                    buildJar()
+                }
+            }
+        }
+
         stage("build image") {
             when {
                 expression {
@@ -42,6 +58,19 @@ pipeline {
             steps {
                 script {
                     gv.buildImage()
+                }
+            }
+        }
+
+        stage("build image from lib") {
+            when {
+                expression {
+                    BRANCH_NAME == "jenkins-shared-library"
+                }
+            }
+            steps {
+                script {
+                    buildImage()
                 }
             }
         }
