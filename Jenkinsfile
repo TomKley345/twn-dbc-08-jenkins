@@ -71,7 +71,7 @@ pipeline {
                 }
             }
             steps {
-                buildImage()
+                buildImage 'tomkley/demo-app:jma-2.4'
             }
         }
 
