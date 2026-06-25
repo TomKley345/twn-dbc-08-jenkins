@@ -1,5 +1,9 @@
 def gv
 
+// Use GIT_BRANCH, if BRANCH_NAME does not exist
+def branch = env.BRANCH_NAME ?: env.GIT_BRANCH
+echo "Branch: ${branch}"
+
 pipeline {   
     agent any
     tools {
