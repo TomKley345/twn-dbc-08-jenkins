@@ -10,6 +10,7 @@ echo "Branch: ${branch}"
 pipeline {
     agent any
     triggers {
+        // register the pipeline for Github Webhooks
         githubPush()
     }
     tools {
