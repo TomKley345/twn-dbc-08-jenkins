@@ -9,6 +9,9 @@ echo "Branch: ${branch}"
 
 pipeline {
     agent any
+    triggers {
+        githubPush()
+    }
     tools {
         maven "maven-3.9.16"
     }
