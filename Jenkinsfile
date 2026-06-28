@@ -7,12 +7,21 @@ echo "Branch: ${branch}"
 pipeline {   
     agent any
     triggers {
+        // register GitHub-Webhook
         githubPush()
     }
     tools {
         maven "maven-3.9.16"
     }
     stages {
+        stage('Checkout') {
+            steps {
+                // Der Quellcode wird automatisch für den jeweiligen Branch ausgecheckt
+                cleanWs()
+                checkout scm
+            }
+        }
+        
         stage("init") {
             steps {
                 echo "initializing branch $BRANCH_NAME"
