@@ -70,6 +70,10 @@ pipeline {
                        sh 'git status'
                        sh 'git branch'
                        sh 'git config --list'
+
+                       echo "${USER}"
+
+                       echo "user confirmed"
                         
                        sh "git remote set-url origin https://${USER}:${PASS}@github.com/TomKley345/twn-dbc-08-jenkins.git"
                        sh "git add ."
