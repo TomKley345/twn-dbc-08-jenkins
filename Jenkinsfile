@@ -63,19 +63,19 @@ pipeline {
             steps {
                 script {
                     echo "bumped up version commit and push..."
-                    // withCredentials([usernamePassword(credentialsId: '5648b55c-a7b7-4608-a836-28ff4c220e64', usernameVariable: 'USER', passwordVariable: 'PASS')]) {
-                       // sh 'git config --global user.email "jenkins@example.com"'
-                       // sh 'git config --global user.name "jenkins"'
+                    withCredentials([usernamePassword(credentialsId: '5648b55c-a7b7-4608-a836-28ff4c220e64', usernameVariable: 'USER', passwordVariable: 'PASS')]) {
+                       sh 'git config --global user.email "jenkins@example.com"'
+                       sh 'git config --global user.name "jenkins"'
                         
-                       // sh 'git status'
-                       // sh 'git branch'
-                       // sh 'git config --list'
+                       sh 'git status'
+                       sh 'git branch'
+                       sh 'git config --list'
                         
                        // sh "git remote set-url origin https://${USER}:${PASS}@github.com/TomKley345/twn-dbc-08-jenkins.git"
                        // sh "git add ."
                        // sh 'git commit -m "Jenkins ci: bumping up the version"'
                        // sh "git push origin HEAD:dynamic-version-update"
-                    // }
+                    }
                 }                
             }
         }               
