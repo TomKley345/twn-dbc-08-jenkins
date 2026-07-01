@@ -71,8 +71,8 @@ pipeline {
                        sh 'git branch'
                        sh 'git config --list'
                         
-                       // sh "git remote set-url origin https://${USER}:${PASS}@github.com/TomKley345/twn-dbc-08-jenkins.git"
-                       // sh "git add ."
+                       sh "git remote set-url origin https://${USER}:${PASS}@github.com/TomKley345/twn-dbc-08-jenkins.git"
+                       sh "git add ."
                        // sh 'git commit -m "Jenkins ci: bumping up the version"'
                        // sh "git push origin HEAD:dynamic-version-update"
                     }
