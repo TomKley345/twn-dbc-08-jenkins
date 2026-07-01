@@ -64,7 +64,7 @@ pipeline {
                 script {
                     echo "bumped up version commit and push..."
                     withCredentials([usernamePassword(credentialsId: '5648b55c-a7b7-4608-a836-28ff4c220e64', usernameVariable: 'USER', passwordVariable: 'PASS')]) {
-                        sh 'git config --global user.email "jenkins@example.com'
+                        sh 'git config --global user.email "jenkins@example.com"'
                         sh 'git config --global user.name "jenkins"'
                         
                         sh 'git status'
